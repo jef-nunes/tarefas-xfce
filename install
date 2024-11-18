@@ -1,0 +1,12 @@
+#!/bin/bash
+
+origin="./Scripts"
+
+destination="$HOME/Scripts"
+
+if [ -d "$origin" ]; then
+    mv "$origin" "$destination"
+    echo "Scripts folder moved to home directory."
+else
+    echo "Error moving the Scripts folder to home directory."
+fi
