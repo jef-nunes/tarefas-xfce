@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Screen temperature (xsct) automation
+
+status="./status"
+
+# Create file if not exists
+if [ ! -f "$status" ]; then
+    echo "default" > "$status"
+fi
+
+# Read status first line
+temperature=$(cat "$status")
+
+# Set screen temperature and update status config
+if [ "$temperature" == "default" ]; then
+    xsct 5500    
+    echo "warm" > "$status"
+else
+    xsct 6400    
+    echo "default" > "$status"
+fi
