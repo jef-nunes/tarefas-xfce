@@ -1,0 +1,45 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <number> <image_mode>"
+    echo "Available modes: centered, stretched, tiled, scaled, etc."
+    exit 1
+fi
+
+
+IMAGE_PATH_LINE_NUMBER=$1
+IMAGE_MODE=$2
+
+if [ ! -f "bgpaths.txt" ]; then
+    echo "Error: The file 'bgpaths.txt' was not found."
+    exit 1
+fi
+
+IMAGE_PATH=$(sed -n "${IMAGE_PATH_LINE_NUMBER}p" bgpaths.txt)
+
+if [ -z "$IMAGE_PATH" ]; then
+    echo "Error: Invalid number or line not found in 'bgpaths.txt'."
+    exit 1
+fi
+
+if [ ! -f "$IMAGE_PATH" ]; then
+    echo "Error: The image file was not found at '$IMAGE_PATH'."
+    exit 1
+fi
+
+xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s "$IMAGE_PATH"
+
+if [ "$IMAGE_MODE" == "centered" ]; then
+    xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-style -s 0
+elif [ "$IMAGE_MODE" == "stretched" ]; then
+    xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-style -s 1
+elif [ "$IMAGE_MODE" == "tiled" ]; then
+    xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-style -s 2
+elif [ "$IMAGE_MODE" == "scaled" ]; then
+    xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-style -s 3
+else
+    echo "Unknown mode: $IMAGE_MODE. Use 'centered', 'stretched', 'tiled', or 'scaled'."
+    exit 1
+fi
+
+echo "Wallpaper updated to '$IMAGE_PATH' with the mode '$IMAGE_MODE'."
