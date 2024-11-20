@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Screen temperature (xsct) automation
+# Screen temperature toggle using xsct application 
 
 status="./status"
 
