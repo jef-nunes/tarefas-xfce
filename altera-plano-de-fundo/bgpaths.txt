@@ -1,1 +1,1 @@
-# Inserir paths de planos de fundo, com quebra de linha
+# Inserir paths de planos de fundo com quebra de linha
