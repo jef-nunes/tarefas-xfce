@@ -6,7 +6,6 @@ if [ $# -ne 2 ]; then
     exit 1
 fi
 
-
 IMAGE_PATH_LINE_NUMBER=$1
 IMAGE_MODE=$2
 
