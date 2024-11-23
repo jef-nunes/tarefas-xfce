@@ -1,2 +1,3 @@
 #!/bin/bash
+# Rodando a aplicação Conky em um terminal separado
 xfce4-terminal --hold -T "Conky"  -e "conky"
